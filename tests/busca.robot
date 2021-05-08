@@ -1,23 +1,26 @@
 ***Settings***
-Library     Browser
+
+Resource        ${EXECDIR}/resources/base.robot
+
+Test Setup      Start Session
+Test Teardown   Take Screenshot
 
 
 ***Test Cases***
-Buscar um restaurante
-    New Browser     chromium    False
-    # New Page        https://playwright.dev
-    New Page        http://parodifood.qaninja.academy/
-    # Checkpoint
-    Get Text        css=span  contains    Nunca foi tão engraçado pedir comida
+Deve buscar um único restaurante
+    
+    Search Restaurant       Debuger
+    Restaurant Should Be Visible    DEBUGER KING        ${ELEMENT}        ${ELEMENT_INFO_BOX}
+    Verify Quantities Restaurants        1       ${ELEMENT}       ${ELEMENT_INFO_BOX}
 
-    Click           text=Estou com fome!
-    Get Text        css=h1 strong       contains    Ta na hora de matar a fome!
 
-    Click           css=.search-link
-    Fill Test       css=input[formcontrolname="searchControl"]      Debuger
+Deve buscar por categoria
 
-    # Sleep           10
+    Search Restaurant       Cafe
+    Restaurant Should Be Visible     STARBUGS COFFEE    ${ELEMENT}       ${ELEMENT_INFO_BOX}
 
-    Wait For Elements State     css=.place-info-box     visible     10
 
-    Get Text        css=.place-info-box         contains        DEBUGER KING
+Deve buscar todos os restaurantes
+
+    Search Restaurant       a
+    Verify Quantities Restaurants       5       ${ELEMENT}      ${ELEMENT_INFO_BOX}

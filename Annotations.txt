@@ -1,0 +1,175 @@
+## Algumas formas de uso
+    
+[x] - busca.robot
+
+    # New Browser     chromium    False
+    # # New Page        https://playwright.dev
+    # New Page        http://parodifood.qaninja.academy/
+    # # Checkpoint
+    # Get Text        css=span  contains    Nunca foi tão engraçado pedir comida
+
+    # Start Session
+
+    # Click           text=Estou com fome!
+    # Get Text        css=h1 strong       contains    Ta na hora de matar a fome!
+
+    # Click           css=.search-link
+    # Fill Text       css=input[formcontrolname="searchControl"]      Debuger
+
+
+    # Click           css=.search-link
+    # Fill Text       css=input[formcontrolname="searchControl"]      Cafe
+
+    # Click           css=.search-link
+    # Fill Text       css=input[formcontrolname="searchControl"]      a
+
+    # Sleep           10
+
+    # Wait For Elements State     css=.place-info-box     visible     10
+
+    # Wait For Elements State     css=div[class="place-info-box"][style="opacity: 1;"]    visible     10
+
+    # Get Text                    css=.place-info-box         contains        DEBUGER KING
+
+    # Get Element Count           css=.place-info-box     equal       1
+
+    # Get Element Count           css=.place-info-box     equal       5
+
+    # Wait For Elements State     css=div[class="place-info-box"][style="opacity: 1;"]    visible     10
+
+    # Get Text                    css=.place-info-box         contains        STARBUGS COFFEE
+
+    # Sleep   1
+
+    # Take Screenshot
+
+    # ***Keywords***
+
+    # Start Session
+    #     New Browser     chromium    False
+
+    #     New Page        http://parodifood.qaninja.academy/
+
+    #     Get Text        css=span  contains    Nunca foi tão engraçado pedir comida
+
+    # Search Restaurant
+    #     [Arguments]     ${TARGET}
+    #     Click           text=Estou com fome!
+    #     Get Text        css=h1 strong       contains    Ta na hora de matar a fome!
+
+    #     Click           css=.search-link
+    #     Fill Text       css=input[formcontrolname="searchControl"]      ${TARGET}
+
+
+    # Restaurant Should Be Visible
+    #     [Arguments]         ${NAME}     ${ELEMENT}
+    #     Wait For Elements State     css=div[class="place-info-box"][style="opacity: 1;"]    visible     10
+    #     Get Text                    ${ELEMENT}         contains        ${NAME}
+
+    # Verify Quantities Restaurants
+    #     [Arguments]         ${QUANTITY}     ${ELEMENT}
+    #     Wait For Elements State     ${ELEMENT}     visible     10
+    #     Get Element Count           ${ELEMENT}     equal       ${QUANTITY}
+
+
+[x] - carrinho.robot
+
+    # Variáveis
+    ${name}     Set Variable     STARBUGS COFFEE
+    ${desc}     Set Variable     Nada melhor que um café pra te ajudar a resolver um bug.
+
+
+    # Super variável
+    &{restaurant}       Create Dictionary       name=STARBUGS COFFEE    desc=Nada melhor que um café pra te ajudar a resolver um bug.
+
+
+
+    # Click                           Text=STARBUGS COFFEE
+    # Wait For Elements State         css=#detail     visible     10
+    # Get Text        css=#detail     contains        Nada melhor que um café pra te ajudar a resolver um bug.
+
+    # Trabalhando com multiplas linhas para uma keyword
+    # Choose Restaurant  
+    # ...     STARBUGS COFFEE  Nada melhor que um café pra te ajudar a resolver um bug.
+
+    # Ou trabalhando com variáveis
+    # Choose Restaurant       ${name}     ${desc}
+
+    # Ou trabalhando com lista/array ou dicionario
+    Choose Restaurant       ${restaurant}
+
+    
+    # Click           xpath=//span[text()="Starbugs 500 error"]/..//a[@class="add-to-cart"]
+
+    # Wait For Elements State         css=#cart tr >> text=Starbugs 500 error       visible     5
+
+
+    *Keywords*
+    Choose Restaurant
+        # [Arguments]         ${NAME}     ${DESCRIPTION}
+        [Arguments]         ${RESTAURANT}    
+
+        Click           text=${RESTAURANT["name"]}
+
+        Wait For Elements State         css=#detail     visible     10
+        Get Text        css=#detail     contains        ${RESTAURANT["desc"]}
+
+    Add To Cart
+        [Arguments]     ${NAME}
+
+        Click           xpath=//span[text()="${NAME}"]/..//a[@class="add-to-cart"]
+
+
+    Should Add To Cart
+        [Arguments]         ${NAME}
+
+        Wait For Elements State         css=#cart tr >> text=${NAME}       visible     5
+
+
+    Total Cart Should Be
+        [Arguments]         ${TOTAL}
+
+        Get Text        xpath=//th[contains(text(), "Total")]/../td     contains        ${TOTAL}  
+
+
+    
+    # Adicionando o Cappuccino com Chantilly
+    Add To Cart             ${cart_json["products"][0]["name"]}
+    Should Add To Cart      ${cart_json["products"][0]["name"]}
+
+    # Adicionando o Super Espreso
+    Add To Cart             ${cart_json["products"][1]["name"]}
+    Should Add To Cart      ${cart_json["products"][1]["name"]}
+
+    # Adicionando o Starbugs 500 error
+    Add To Cart             ${cart_json["products"][2]["name"]}
+    Should Add To Cart      ${cart_json["products"][2]["name"]}
+
+    # Total Cart Should Be    38,00
+
+    *Keywords*
+    Choose Restaurant
+    # [Arguments]         ${NAME}     ${DESCRIPTION}
+    [Arguments]         ${RESTAURANT}    
+
+    Click           text=${RESTAURANT["name"]}
+
+    Wait For Elements State         css=#detail     visible     10
+    Get Text        css=#detail     contains        ${RESTAURANT["desc"]}
+
+    Add To Cart
+    [Arguments]     ${NAME}
+
+    Click           xpath=//span[text()="${NAME}"]/..//a[@class="add-to-cart"]
+
+
+    Should Add To Cart
+    [Arguments]         ${NAME}
+
+    Wait For Elements State         css=#cart tr >> text=${NAME}       visible     5
+
+
+    Total Cart Should Be
+    [Arguments]         ${TOTAL}
+
+    Get Text        xpath=//th[contains(text(), "Total")]/../td     contains        ${TOTAL}  
