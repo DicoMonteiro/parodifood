@@ -20,17 +20,17 @@ Search Restaurant
 
 Restaurant Should Be Visible
     [Arguments]         ${NAME}     ${ELEMENT}      ${ELEMENT_INFO_BOX}
-    Wait For Elements State     ${ELEMENT_INFO_BOX}    visible     20
+    Wait For Elements State     ${ELEMENT_INFO_BOX}    visible     ${DEFAULT_TIMEOUT}
     Get Text                    ${ELEMENT}         contains        ${NAME}
 
 Verify Quantities Restaurants
     [Arguments]         ${QUANTITY}     ${ELEMENT}   ${ELEMENT_INFO_BOX}
-    Wait For Elements State     ${ELEMENT_INFO_BOX}     visible     20
+    Wait For Elements State     ${ELEMENT_INFO_BOX}     visible     ${DEFAULT_TIMEOUT}
     Get Element Count           ${ELEMENT}     equal       ${QUANTITY}
 
 Choose Restaurant
     [Arguments]         ${var}    
 
     Click           text=${var["restaurant"]}
-    Wait For Elements State         css=#detail     visible     10
+    Wait For Elements State         css=#detail     visible     ${DEFAULT_TIMEOUT}
     Get Text        css=#detail     contains        ${var["desc"]}

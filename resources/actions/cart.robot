@@ -14,7 +14,7 @@ Should Add To Cart
     [Arguments]         ${NAME}
 
     Log             ${NAME}
-    Wait For Elements State         css=#cart tr >> text=${NAME}       visible     5
+    Wait For Elements State         css=#cart tr >> text=${NAME}       visible     ${DEFAULT_TIMEOUT}
 
 
 Total Cart Should Be

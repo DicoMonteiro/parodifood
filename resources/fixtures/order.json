@@ -1,0 +1,24 @@
+{
+    "search_item": "Debuger",
+    "restaurant": "DEBUGER KING",
+    "desc": "40 anos se especializando em trash food.",
+    "products": [
+        {
+            "name": "Woopper Burger"
+        },
+        {
+            "name": "Batatas Fritas"
+        },
+        {
+            "name": "Refrigerante"
+        }
+    ],
+    "total": "28,50",
+    "customer": {
+        "name": "Adriano Almeida",
+        "email": "adrianoalmeida@gmail.com",
+        "address": "Rua das exceptions",
+        "number": "1260"
+    },
+    "payment": "Dinheiro"
+}

@@ -48,3 +48,16 @@ robot -d ./logs -i temp tests/carrinho.robot
 - Executando todos os cenários
 
 robot -d ./logs tests\
+
+
+- Executando com dados enviados via linha de comando
+
+robot -d ./logs -v browser:chromium -v headless:False tests\
+
+
+### Resultados ###
+## Verificar os resultados obtidos
+
+- Pasta aonde foi definido os outputs
+
+    logs/log.html ou logs/report.html

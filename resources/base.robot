@@ -7,7 +7,11 @@ Library             OperatingSystem
 Resource            actions/search.robot
 Resource            actions/home.robot
 Resource            actions/cart.robot
+Resource            actions/order.robot
 
+
+* Variables *
+${DEFAULT_TIMEOUT}  10
 
 *Keywords*
 ### Helpers ###

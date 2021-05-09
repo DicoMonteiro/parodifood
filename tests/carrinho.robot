@@ -5,9 +5,6 @@ Resource        ${EXECDIR}/resources/base.robot
 Test Setup      Start Session
 Test Teardown   Take Screenshot
 
-# *Variables*
-
-# ${cart_json}        Get JSON        cart.json
 
 
 ***Test Cases***
